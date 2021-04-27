@@ -11,16 +11,17 @@ export default props => {
     if (styleField.length === 1) styleField.push(styles.regular)
 
     let color = null
-    if (nearMines > 0){
+    if (nearMines > 0) {
         if (nearMines == 1) color = "2a2807"
         if (nearMines == 2) color = "2b520f"
         if (nearMines > 2 && nearMines < 6) color = "#f9060a"
-        if (nearMines >= 6) color = "f221a9"
+        if (nearMines >= 6) color = "#f221a9"
     }
 
     return (
         <View style={styleField}>
-
+            {!mined && opened && nearMines > 0 ?
+                <Text style={[styles.label, { color: color }]}>{nearMines}</Text> : false}
         </View>
     )
 }
@@ -38,5 +39,16 @@ const styles = StyleSheet.create({
         borderTopColor: "#CCC",
         borderRightColor: "#333",
         borderBottomColor: "#333"
+    },
+    opened: {
+        backgroundColor: "#999",
+        borderColor: "#777",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    label: {
+        fontWeight: "bold",
+        fontSize: params.fontSize,
+
     }
 })
